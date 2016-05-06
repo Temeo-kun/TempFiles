@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Cstorage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><codes><Ccode><uid>c90a2afe-3b3d-4069-af70-ddd97968507f</uid><name>Рабочая директория приложения</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset0 Consolas;}{\f2\fnil\fcharset204 Microsoft Sans Serif;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red163\green21\blue21;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19 public\cf3  \cf1 static\cf3  \cf1 string\cf3  ExecuteFolder\par
+\{\par
+\lang1033\f1\tab\cf1\lang1049\f0 get\cf3\par
+\lang1033\f1\tab\lang1049\f0\{\par
+\lang1033\f1\tab\tab\cf1\lang1049\f0 string\cf3  str = \cf4 Application\cf3 .ExecutablePath;\par
+\lang1033\f1\tab\tab\cf1\lang1049\f0 string\cf3  namef = \cf5 ""\cf3 ;\par
+\lang1033\f1\tab\tab\cf1\lang1049\f0 for\cf3  (\cf1 int\cf3  i = 0; i &lt;= str.LastIndexOf(\cf5 '\\\\'\cf3 ); i++)\par
+\lang1033\f1\tab\tab\lang1049\f0\{\par
+\lang1033\f1\tab\tab\tab\lang1049\f0 namef = namef + str[i];\par
+\lang1033\f1\tab\tab\lang1049\f0\}\par
+\lang1033\f1\tab\tab\cf1\lang1049\f0 string\cf3  filename = namef;\par
+\lang1033\f1\tab\tab\cf1\lang1049\f0 return\cf3  filename;\par
+\lang1033\f1\tab\lang1049\f0\}\par
+\}\cf0\highlight0\f2\fs17\par
+}
+</lines></Ccode><Ccode><uid>ea16e0e6-d7ef-4eea-83bb-3938b394682b</uid><name>Загрузка из xml</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset0 Consolas;}{\f2\fnil\fcharset204 Microsoft Sans Serif;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red163\green21\blue21;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19 try\cf3\par
+\{\par
+\lang1033\f1\tab\cf1\lang1049\f0 var\cf3  s = \cf1 new\cf3  \cf4 XmlSerializer\cf3 (\cf1 typeof\cf3 (\cf4\lang1033\f1 &lt;Class&gt;\cf3\lang1049\f0 ));\lang1033\f1\tab\par
+\tab\cf1\lang1049\f0 var\cf3  w = \cf4 XmlReader\cf3 .Create(\cf5 "\lang1033\f1 filename.xml\lang1049\f0 "\cf3 );\par
+\lang1033\f1\tab\cf1\lang1049\f0 var\cf3  dc = (s.Deserialize(w)) \cf1 as\cf3  \cf4\lang1033\f1 &lt;Class&gt;\cf3\lang1049\f0 ;\par
+\lang1033\f1\tab &lt;classobject&gt;\lang1049\f0  = dc;\par
+\lang1033\f1\tab\lang1049\f0 w.Close();\par
+\}\par
+\cf1 catch\cf3  (\cf4 Exception\cf3 )\par
+\{\par
+\par
+\}\cf0\highlight0\f2\fs17\par
+}
+</lines></Ccode><Ccode><uid>b6a71fef-5ec2-434a-88d0-b233a400e088</uid><name>Сохранение в xml</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset0 Consolas;}{\f2\fnil\fcharset204 Microsoft Sans Serif;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red163\green21\blue21;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19 try\cf3\par
+\{\par
+\lang1033\f1\tab\cf1\lang1049\f0 var\cf3  s1 = \cf1 new\cf3  \cf4 XmlSerializer\cf3 (\cf1 typeof\cf3 (\cf4\lang1033\f1 &lt;Class&gt;\cf3\lang1049\f0 ));\par
+\lang1033\f1\tab\cf1\lang1049\f0 var\cf3  w1 = \cf4 XmlWriter\cf3 .Create(\cf5 "\lang1033\f1 filename\lang1049\f0 .xml"\cf3 );\par
+\lang1033\f1\tab\lang1049\f0 s1.Serialize(w1, \cf1\lang1033\f1 &lt;classObject&gt;\cf3\lang1049\f0 );\par
+\lang1033\f1\tab\lang1049\f0 w1.Close();\par
+\}\lang1033\f1\tab\par
+\cf1\lang1049\f0 catch\cf3\par
+\{\par
+\par
+\}\cf0\highlight0\f2\fs17\par
+}
+</lines></Ccode><Ccode><uid>654e5c45-fb92-4f1f-8e66-714126f32bb6</uid><name>Вставка строки в Excel (NetOffice)</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset0 Consolas;}{\f2\fnil\fcharset204 Microsoft Sans Serif;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red0\green128\blue0;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19 public\cf3  \cf1 void\cf3  InsertRow(NetOffice.ExcelApi.\cf4 Worksheet\cf3  _workSheet, \cf1 int\cf3  rowNum)\par
+\{\par
+\lang1033\f1\tab\lang1049\f0 NetOffice.ExcelApi.\cf4 Range\cf3  cellRange = (NetOffice.ExcelApi.\cf4 Range\cf3 )_workSheet.Cells[rowNum, 1];\par
+\lang1033\f1\tab\lang1049\f0 NetOffice.ExcelApi.\cf4 Range\cf3  rowRange = cellRange.EntireRow;\par
+\lang1033\f1\tab\lang1049\f0 rowRange.Insert(-4121\cf5 /*xlShiftDown*/\cf3 , \cf1 false\cf3 );\par
+\}\cf0\highlight0\f2\fs17\par
+}
+</lines></Ccode><Ccode><uid>dc81809e-e8eb-41d1-aba0-cc292511ff4c</uid><name>Обработка нажатия Del</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset204 Microsoft Sans Serif;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19 if\cf3  (e.KeyCode == \cf4 Keys\cf3 .Delete)\cf0\highlight0\f1\fs17\par
+}
+</lines></Ccode><Ccode><uid>d49b8599-cc87-46b4-99d1-3596ffefb385</uid><name>Выбор ПКМ строки в DataGridView</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset204 Microsoft Sans Serif;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red0\green128\blue0;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19 public\cf3  \cf1 static\cf3  \cf1 class\cf3  \cf4 MausClick\cf3\par
+\{\par
+    \cf1 public\cf3  \cf1 static\cf3  \cf1 void\cf3  DGV_right_click(\cf4 DataGridView\cf3  dataGridView1, \cf1 object\cf3  sender, \cf4 MouseEventArgs\cf3  e)\par
+    \{\par
+        \cf1 if\cf3  (e.Button == \cf4 MouseButtons\cf3 .Right)\par
+        \{\par
+            \cf4 DataGridView\cf3 .\cf4 HitTestInfo\cf3  info = dataGridView1.HitTest(e.X, e.Y);\par
+            \cf1 if\cf3  (info.Type == \cf4 DataGridViewHitTestType\cf3 .Cell)\par
+                \cf1 if\cf3  (!dataGridView1.Rows[info.RowIndex].Selected)\par
+                \{\par
+                    dataGridView1.ClearSelection();\par
+                    dataGridView1.Rows[info.RowIndex].Selected = \cf1 true\cf3 ;\par
+                    \cf5 //dataGridView1.CurrentCell = dataGridView1[info.ColumnIndex, info.RowIndex];\cf3\par
+                \}\par
+        \}\par
+    \}\par
+\}\cf0\highlight0\f1\fs17\par
+}
+</lines></Ccode><Ccode><uid>c9431e98-2098-4fad-a562-7f952aedf5e3</uid><name>Шаблон "Одиночка"</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset0 Consolas;}{\f2\fnil\fcharset204 Consolas;}{\f3\fnil\fcharset204 Microsoft Sans Serif;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red0\green128\blue0;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19 public\cf3  \cf1 class\cf3  \cf4\lang1033\f1 Class\cf3\lang1049\f0\par
+\{\par
+\lang1033\f1\tab\cf5\lang1049\f0 //\f2\'ee\'e4\'e8\'ed\'ee\'f7\'ea\'e0\f0  \cf3\par
+\lang1033\f1\tab\cf1\lang1049\f0 private\cf3  \cf1 static\cf3  \cf4\lang1033\f1 Class \cf3\lang1049\f0 c;\par
+\par
+\lang1033\f1\tab\cf1\lang1049\f0 private\cf3  \lang1033\f1 Class\lang1049\f0 ()\par
+\lang1033\f1\tab\lang1049\f0\{\par
+            \par
+\lang1033\f1\tab\lang1049\f0\}\par
+\lang1033\f1\tab\cf5\lang1049\f0 //\f2\'e2\'fb\'e4\'e0\'f2\'fc\f0  \f2\'fd\'ea\'e7\'e5\'ec\'ef\'eb\'ff\'f0\f0  \f2\'ee\'e4\'e8\'ed\'ee\'f7\'ea\'e8\cf3\f0\par
+\lang1033\f1\tab\cf1\lang1049\f0 public\cf3  \cf1 static\cf3  \cf4\lang1033\f1 Class \cf3\lang1049\f0 Get()\par
+\lang1033\f1\tab\lang1049\f0\{\par
+\lang1033\f1\tab\tab\cf1\lang1049\f0 if\cf3  (ct == \cf1 null\cf3 )\par
+\lang1033\f1\tab\tab\lang1049\f0\{\par
+\lang1033\f1\tab\tab\tab\lang1049\f0 ct = \cf1 new\cf3  \cf4\lang1033\f1 Class\cf3\lang1049\f0 ();\par
+\lang1033\f1\tab\tab\lang1049\f0\}\par
+\lang1033\f1\tab\tab\cf1\lang1049\f0 return\cf3  ct;\par
+\lang1033\f1\tab\lang1049\f0\}       \par
+\lang1033\f1\}\cf0\highlight0\lang1049\f3\fs17\par
+}
+</lines></Ccode><Ccode><uid>a57a2c2d-55a2-4f0d-9101-9d4c289cea72</uid><name>Ввод только чисел</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset204 Consolas;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red0\green128\blue0;\red163\green21\blue21;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19 private\cf3  \cf1 void\cf3  textBox_KeyPress(\cf1 object\cf3  sender, \cf4 KeyPressEventArgs\cf3  e)\par
+\{\par
+    \cf5 //\f1\'c2\'f1\'e5\f0  \f1\'ea\'f0\'ee\'ec\'e5\f0  \f1\'f6\'e8\'f4\'f0\f0  \cf3\par
+    \cf1 if\cf3  (!((e.KeyChar &gt;= \cf6 '0'\cf3 ) &amp;&amp; (e.KeyChar &lt;= \cf6 '9'\cf3 )))\par
+    \{\par
+        \cf1 return\cf3 ;\par
+    \}\par
+    \cf5 //\f1\'d2\'ee\'f7\'ea\'f3\f0  \f1\'e7\'e0\'ec\'e5\'ed\'e8\'ec\f0  \f1\'e7\'e0\'ef\'ff\'f2\'ee\'e9\cf3\f0\par
+    \cf1 if\cf3  (e.KeyChar == \cf6 '.'\cf3 )\par
+    \{\par
+        e.KeyChar = \cf6 ','\cf3 ;\par
+    \}\par
+\par
+    \cf1 if\cf3  (e.KeyChar == \cf6 ','\cf3 )\par
+    \{\par
+        \cf1 if\cf3  (textBox1.Text.IndexOf(\cf6 ','\cf3 ) != -1)\par
+        \{\par
+            \cf5 //\f1\'d3\'e6\'e5\f0  \f1\'e5\'f1\'f2\'fc\f0  \f1\'ee\'e4\'ed\'e0\f0  \f1\'e7\'e0\'ef\'ff\'f2\'e0\'ff\f0  \f1\'e2\f0  textBox1\cf3\par
+            e.Handled = \cf1 true\cf3 ;\par
+        \}\par
+        \cf1 return\cf3 ;\par
+    \}\par
+\par
+            \cf5 //\f1\'d3\'ef\'f0\'e0\'e2\'eb\'ff\'fe\'f9\'e8\'e5\f0  \f1\'ea\'eb\'e0\'e2\'e8\'f8\'e8\f0  &lt;Backspace&gt;, &lt;Enter&gt; \f1\'e8\f0  \f1\'f2\f0 .\f1\'e4\f0 .\cf3\par
+            \cf1 if\cf3  (\cf4 Char\cf3 .IsControl(e.KeyChar))\par
+    \{\par
+        \cf1 return\cf3 ;\par
+    \}\par
+\par
+    \cf5 //\f1\'ce\'f1\'f2\'e0\'eb\'fc\'ed\'ee\'e5\f0  \f1\'e7\'e0\'ef\'f0\'e5\'f9\'e5\'ed\'ee\cf3\f0\par
+    e.Handled = \cf1 true\cf3 ;\par
+\}\cf1\par
+}
+</lines></Ccode><Ccode><uid>4dd653dc-4684-41ab-ac12-023b5724d0c5</uid><name>Ввод при нажатии Enter</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset204 Microsoft Sans Serif;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19 private\cf3  \cf1 void\cf3  textBox5_KeyUp(\cf1 object\cf3  sender, \cf4 KeyEventArgs\cf3  e)\par
+        \{\par
+            \cf1 if\cf3  (e.KeyCode == \cf4 Keys\cf3 .Enter)\cf0\highlight0\f1\fs17\par
+}
+</lines></Ccode><Ccode><uid>baa4b025-6365-4963-b91a-5508b9639659</uid><name>Ресайзер DataGridView</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset0 Consolas;}{\f2\fnil\fcharset204 Consolas;}{\f3\fnil\fcharset204 Microsoft Sans Serif;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19 private\cf3  \cf1 void\cf3  FormSizeChanged()\f1  \f2  !!!!!!!!!!!!!!!!!!!!!!!!!!!\cf1\f0\par
+\par
+try\cf3\par
+\{\par
+\lang1033\f1\tab\cf1\lang1049\f0 if\cf3  (dataGridView1.Width &gt; 650 || \cf1 this\cf3 .WindowState == \cf4 FormWindowState\cf3 .Maximized)\par
+\lang1033\f1\tab\lang1049\f0\{\par
+\lang1033\f1\tab\tab\lang1049\f0 dataGridView1.AutoSizeColumnsMode = \cf4 DataGridViewAutoSizeColumnsMode\cf3 .Fill;\par
+\lang1033\f1\tab\lang1049\f0\}\par
+\lang1033\f1\tab\cf1\lang1049\f0 else\cf3\par
+\lang1033\f1\tab\lang1049\f0\{\par
+\lang1033\f1\tab\tab\lang1049\f0 dataGridView1.AutoSizeColumnsMode = \cf4 DataGridViewAutoSizeColumnsMode\cf3 .ColumnHeader;\par
+\lang1033\f1\tab\lang1049\f0\}\par
+\}\par
+\cf1 catch\cf3  \{ \}\cf0\highlight0\f3\fs17\par
+}
+</lines></Ccode><Ccode><uid>44267280-2c00-47c7-81ab-7c4c172eb62f</uid><name>Смена текста кнопки на выполнение функции</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset204 Consolas;}{\f2\fnil\fcharset0 Consolas;}{\f3\fnil\fcharset204 Microsoft Sans Serif;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red163\green21\blue21;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19 private\cf3  \cf1 void\cf3  button_Click(\cf1 object\cf3  sender, \cf4 EventArgs\cf3  e)\par
+        \{\par
+            \cf1 string\cf3  text = button.Text;\par
+            button.Text = \cf5 "\f1\'c2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'e5\f0 ..."\cf3 ;\par
+            \cf1 this\cf3 .Refresh();\par
+\par
+            \f1 //\lang1033\f2 codeExecution\lang1049\f0\par
+\par
+            button.Text = text;\par
+            \cf1 this\cf3 .Refresh();\par
+        \}\cf0\highlight0\f3\fs17\par
+}
+</lines></Ccode><Ccode><uid>e89a4375-380c-4e5d-811f-4b26f00ffae5</uid><name>Сравнение двух дат</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset0 Consolas;}{\f2\fnil\fcharset204 Consolas;}{\f3\fnil\fcharset204 Microsoft Sans Serif;}}
+{\colortbl ;\red0\green0\blue0;\red255\green255\blue255;\red0\green128\blue0;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19\par
+\lang1033\f1 DateTime dt1\lang1049\f0 ;\par
+\lang1033\f1 DateTime dt2;\par
+\par
+value = dt1.CompareTo(dt2)\par
+\par
+\cf3\lang1049\f0 //\lang1033\f1 value = -1  - dt1 \lang1049\f2\'f0\'e0\'ed\'fc\'f8\'e5\lang1033\f1  dt2\par
+\lang1049\f0 //\lang1033\f1 value = 0 - dt1 \lang1049\f2\'f0\'e0\'e2\'e5\'ed \lang1033\f1 dt2\par
+//value = 1 - dt1 \lang1049\f2\'ef\'ee\'e7\'e6\'e5\lang1033\f1  dt2\cf0\highlight0\lang1049\f3\fs17\par
+}
+</lines></Ccode><Ccode><uid>01d7e06a-9ba6-4e25-bab5-d268c54d0ce2</uid><name>Сортировка по клику на заголовок DataGridView</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset204 Consolas;}{\f2\fnil\fcharset0 Consolas;}{\f3\fnil\fcharset204 Microsoft Sans Serif;}}
+{\colortbl ;\red0\green128\blue0;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue255;\red43\green145\blue175;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19 //\f1\'ee\'ef\'f0\'e5\'e4\'e5\'eb\'e5\'ed\'e8\'e5\f0  \f1\'e8\f0  \f1\'e7\'e0\'ef\'ee\'ec\'e8\'ed\'e0\'ed\'e8\'e5\f0  \f1\'ea\'ee\'eb\'ee\'ed\'ea\'e8\f0 , \f1\'ef\'ee\f0  \f1\'ea\'ee\'f2\'ee\'f0\'ee\'e9\f0  \f1\'ea\'eb\'e8\'ea\'ed\'f3\'eb\'e8\cf3\f0\par
+\cf4 private\cf3  \cf4 void\cf3  dataGridView1_ColumnHeaderMouseClick(\cf4 object\cf3  sender, \cf5 DataGridViewCellMouseEventArgs\cf3  e)\par
+\{\par
+\lang1033\f2\tab\lang1049\f0 col = e.ColumnIndex;\par
+\pard\lang1033\f2\tab\lang1049\f0 Sort\lang1033\f2 Func\lang1049\f0 (col);\par
+\}\par
+\cf1 //\f1\'f1\'ee\'f0\'f2\'e8\'f0\'f3\'e5\'f2 \'ef\'ee \'e8\'ed\'e4\'e5\'ea\'f1\'f3 \'f1\'f2\'ee\'eb\'e1\'f6\'e0, \'ef\'ee\'fd\'f2\'ee\'ec\'f3 \'ed\'e0\'e4\'ee \'e7\'e0\'ef\'f0\'e5\'f9\'e0\'f2\'fc \'ef\'e5\'f0\'e5\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'f1\'f2\'ee\'eb\'e1\'f6\'ee\'e2\cf3\f0\par
+\cf4 private\lang1033\f2  int \cf3 sortype; \lang1049\f0\par
+\par
+\pard\cf4 private\cf3  \cf4 void\cf3  SortContracts(\cf4 int\cf3  sortype)\par
+\{\par
+    contractBindingSource.ResetBindings(\cf4 true\cf3 );\par
+    \cf4 switch\cf3  (sortype)\par
+    \{\par
+        \cf4 case\cf3  0:\par
+            contractBindingSource.DataSource = ctrl.contracts.OrderBy(r =&gt; r.num).ToList();\par
+            \cf4 break\cf3 ;\par
+        \cf4 case\cf3  1:\par
+            contractBindingSource.DataSource = ctrl.contracts.OrderBy(r =&gt; r.date).ToList();\par
+            \cf4 break\cf3 ;\par
+        \cf4 case\cf3  2:\par
+            contractBindingSource.DataSource = ctrl.contracts.OrderBy(r =&gt; r.name).ToList();\par
+            \cf4 break\cf3 ;\par
+    \}\par
+            \par
+\pard\}\cf0\highlight0\f3\fs17\par
+}
+</lines></Ccode><Ccode><uid>fc4928d2-ecd1-4351-b5e8-b004ca5e6a6a</uid><name>MailSlot</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset204 Microsoft Sans Serif;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red163\green21\blue21;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19 #region\cf3  ~ Win32 ~\par
+        \cf1 static\cf3  \cf1 readonly\cf3  \cf4 IntPtr\cf3  INVALID_HANDLE_VALUE = (\cf4 IntPtr\cf3 )(-1);\par
+\par
+        [\cf4 DllImport\cf3 (\cf5 "kernel32.dll"\cf3 , SetLastError = \cf1 true\cf3 , CharSet = \cf4 CharSet\cf3 .Unicode)]\par
+        \cf1 public\cf3  \cf1 static\cf3  \cf1 extern\cf3  \cf4 IntPtr\cf3  CreateFile(\par
+           \cf1 string\cf3  fileName,\par
+           \cf1 uint\cf3  fileAccess,\par
+           \cf1 uint\cf3  fileShare,\par
+           \cf4 IntPtr\cf3  securityAttributes,\par
+           \cf1 uint\cf3  creationDisposition,\par
+           \cf1 uint\cf3  flags,\par
+           \cf4 IntPtr\cf3  template\par
+           );\par
+\par
+        [\cf4 DllImport\cf3 (\cf5 "kernel32.dll"\cf3 , SetLastError = \cf1 true\cf3 )]\par
+        [\cf1 return\cf3 : \cf4 MarshalAs\cf3 (\cf4 UnmanagedType\cf3 .Bool)]\par
+        \cf1 static\cf3  \cf1 extern\cf3  \cf1 bool\cf3  WriteFile(\par
+            \cf4 IntPtr\cf3  hFile,\par
+            \cf1 byte\cf3 [] lpBuffer,\par
+            \cf1 int\cf3  nNumberOfBytesToWrite,\par
+            \cf1 out\cf3  \cf1 int\cf3  lpNumberOfBytesWritten,\par
+            \cf4 IntPtr\cf3  lpOverlapped\par
+            );\par
+\par
+        [\cf4 DllImport\cf3 (\cf5 "kernel32.dll"\cf3 , SetLastError = \cf1 true\cf3 )]\par
+        [\cf1 return\cf3 : \cf4 MarshalAs\cf3 (\cf4 UnmanagedType\cf3 .Bool)]\par
+        \cf1 static\cf3  \cf1 extern\cf3  \cf1 bool\cf3  CloseHandle(\par
+            \cf4 IntPtr\cf3  hObject\par
+            );\par
+\cf1 #endregion\par
+\par
+\cf4 IntPtr\cf3  hMailslot;\par
+\cf1 string\cf3  mailName;\cf1\par
+\par
+\cf3 WriteFile(hMailslot, msg, msg.Length, \cf1 out\cf3  temp, \cf4 IntPtr\cf3 .Zero)\cf0\highlight0\f1\fs17\par
+}
+</lines></Ccode><Ccode><uid>2b46bc32-3a04-4e96-b423-15cedf5e5049</uid><name>Отправка письма с вложением</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset0 Consolas;}{\f2\fnil\fcharset204 Consolas;}{\f3\fnil\fcharset204 Microsoft Sans Serif;}}
+{\colortbl ;\red43\green145\blue175;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue255;\red0\green128\blue0;\red163\green21\blue21;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19 SmtpClient\cf3  client = \cf4 new\cf3  \cf1 SmtpClient\cf3 (\lang1033\f1 &lt;\lang1049\f0 emailServer\lang1033\f1 &gt;\lang1049\f0 , 2525); \cf5 // \f2\'c7\'e4\'e5\'f1\'fc\f0  \f2\'f3\'ea\'e0\'e7\'fb\'e2\'e0\'e5\'ec\f0  \f2\'f1\'ec\'f2\'ef\f0  \f2\'f1\'e5\'f0\'e2\'e5\'f0\f0  \f2\'e8\f0  \f2\'ef\'ee\'f0\'f2\f0 , \f2\'ea\'ee\'f2\'ee\'f0\'fb\'e9\f0  \f2\'ec\'fb\f0  \f2\'e1\'f3\'e4\'e5\'ec\f0  \f2\'e8\'f1\'ef\'ee\'eb\'fc\'e7\'ee\'e2\'e0\'f2\'fc\f0  \cf3\par
+client.Credentials = \cf4 new\cf3  System.Net.\cf1 NetworkCredential\cf3 (\lang1033\f1 &lt;\lang1049\f0 emailAddress\lang1033\f1 &gt;\lang1049\f0 ,\lang1033\f1  &lt;\lang1049\f0 emailPassword\lang1033\f1 &gt;\lang1049\f0 ); \cf5 // \f2\'d3\'ea\'e0\'e7\'fb\'e2\'e0\'e5\'ec\f0  \f2\'eb\'ee\'e3\'e8\'ed\f0  \f2\'e8\f0  \f2\'ef\'e0\'f0\'ee\'eb\'fc\f0  \f2\'e4\'eb\'ff\f0  \f2\'e0\'e2\'f2\'ee\'f0\'e8\'e7\'e0\'f6\'e8\'e8\cf3\f0\par
+\par
+\cf4 string\cf3  msgFrom = \lang1033\f1 &lt;\lang1049\f0 emailAddress\lang1033\f1 &gt;\lang1049\f0 ; \cf5 // \f2\'ee\'f2\f0  \f2\'ea\'ee\'e3\'ee\f0  \f2\'ef\'e8\'f1\'fc\'ec\'ee\f0  \cf3\par
+\cf4 string\cf3  msgTo = \lang1033\f1 &lt;\lang1049\f0 emailAddress\lang1033\f1 Destination&gt;;\cf5\lang1049\f0 // \f2\'ea\'ee\'ec\'f3\f0  \f2\'ef\'e8\'f1\'fc\'ec\'ee\cf3\f0\par
+\cf4 string\cf3  msgSubject = \lang1033\f1 &lt;messageTheme&gt;\lang1049\f0 ; \cf5 // \f2\'f2\'e5\'ec\'e0\f0  \f2\'ef\'e8\'fc\'f1\'ec\'e0\cf3\f0\par
+\par
+\cf4 string\cf3  msgBody = \cf1 String\cf3 .Format(\cf6 "\lang1033\f1 ..."\cf3\lang1049\f0 ); \cf5 // \f2\'ef\'e8\'f1\'fc\'ec\f0 o\cf3\par
+\cf1 MailMessage\cf3  msg = \cf4 new\cf3  \cf1 MailMessage\cf3 (msgFrom, msgTo, msgSubject, msgBody); \cf5 // \f2\'d1\'ee\'e7\'e4\'e0\'e5\'ec\f0  \f2\'ef\'e8\'f1\'fc\'ec\'ee\f0 , \f2\'e8\'e7\f0  \f2\'e2\'f1\'e5\'e3\'ee\f0 , \f2\'f7\'f2\'ee\f0  \f2\'f1\'e4\'e5\'eb\'e0\'eb\'e8\f0  \f2\'e2\'fb\'f8\'e5\cf3\f0\par
+\par
+msg.Attachments.Add(\cf4 new\cf3  \cf1 Attachment\cf3 (\cf6 "\lang1033\f1 path_to_attachment_file\lang1049\f0 "\cf3 , \cf1 MediaTypeNames\cf3 .\cf1 Application\cf3 .Octet));\par
+\par
+\cf4 try\cf3\par
+\{\par
+    client.EnableSsl = \cf4 true\cf3 ;\par
+    client.Send(msg); \cf5 // \f2\'ce\'f2\'ef\'f0\'e0\'e2\'eb\'ff\'e5\'ec\f0  \f2\'ef\'e8\'f1\'fc\'ec\'ee\cf3\f0\par
+\}\par
+\pard\cf4 catch\cf3  \{ \}\cf0\highlight0\f3\fs17\par
+}
+</lines></Ccode><Ccode><uid>b4b07c8a-978b-424c-9356-f25758ced58f</uid><name>Календарь для ячейки DataGridView</name><lines>{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset0 Consolas;}{\f2\fnil\fcharset204 Microsoft Sans Serif;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red0\green128\blue0;\red163\green21\blue21;}
+\viewkind4\uc1\pard\cf1\highlight2\f0\fs19 using\cf3  System.Windows.Forms;\cf1\par
+\par
+namespace\cf3  \lang1033\f1 &lt;Name&gt;\lang1049\f0\par
+\{\par
+\par
+    \cf1 public\cf3  \cf1 class\cf3  \cf4 CalendarColumn\cf3  : \cf4 DataGridViewColumn\cf3\par
+    \{\par
+        \cf1 public\cf3  CalendarColumn()\par
+            : \cf1 base\cf3 (\cf1 new\cf3  \cf4 CalendarCell\cf3 ())\par
+        \{\par
+          \par
+        \}\par
+\par
+        \cf1 public\cf3  \cf1 override\cf3  \cf4 DataGridViewCell\cf3  CellTemplate\par
+        \{\par
+            \cf1 get\cf3\par
+            \{\par
+                \cf1 return\cf3  \cf1 base\cf3 .CellTemplate;\par
+            \}\par
+            \cf1 set\cf3\par
+            \{\par
+                \cf5 // Ensure that the cell used for the template is a CalendarCell.\cf3\par
+                \cf1 if\cf3  (\cf1 value\cf3  != \cf1 null\cf3  &amp;&amp;\par
+                    !\cf1 value\cf3 .GetType().IsAssignableFrom(\cf1 typeof\cf3 (\cf4 CalendarCell\cf3 )))\par
+                \{\par
+                    \cf1 throw\cf3  \cf1 new\cf3  \cf4 InvalidCastException\cf3 (\cf6 "Must be a CalendarCell"\cf3 );\par
+                \}\par
+                \cf1 base\cf3 .CellTemplate = \cf1 value\cf3 ;\par
+            \}\par
+        \}\par
+    \}\par
+\par
+    \cf1 public\cf3  \cf1 class\cf3  \cf4 CalendarCell\cf3  : \cf4 DataGridViewTextBoxCell\cf3\par
+    \{\par
+\par
+        \cf1 public\cf3  CalendarCell()\par
+            : \cf1 base\cf3 ()\par
+        \{\par
+            \cf5 // Use the short date format.\cf3\par
+            \cf1 this\cf3 .Style.Format = \cf6 "d"\cf3 ;\par
+        \}\par
+\par
+        \cf1 public\cf3  \cf1 override\cf3  \cf1 void\cf3  InitializeEditingControl(\cf1 int\cf3  rowIndex, \cf1 object\cf3\par
+            initialFormattedValue, \cf4 DataGridViewCellStyle\cf3  dataGridViewCellStyle)\par
+        \{\par
+            \cf5 // Set the value of the editing control to the current cell value.\cf3\par
+            \cf1 base\cf3 .InitializeEditingControl(rowIndex, initialFormattedValue,\par
+                dataGridViewCellStyle);\par
+            \cf4 CalendarEditingControl\cf3  ctl =\par
+                DataGridView.EditingControl \cf1 as\cf3  \cf4 CalendarEditingControl\cf3 ;\par
+            \cf1 try\cf3\par
+            \{\par
+                ctl.Value = (\cf4 DateTime\cf3 )\cf1 this\cf3 .Value;\par
+            \}\par
+            \cf1 catch\cf3  (\cf4 Exception\cf3 )\par
+            \{\par
+\par
+            \}\par
+        \}\par
+\par
+        \cf1 public\cf3  \cf1 override\cf3  \cf4 Type\cf3  EditType\par
+        \{\par
+            \cf1 get\cf3\par
+            \{\par
+                \cf5 // Return the type of the editing contol that CalendarCell uses.\cf3\par
+                \cf1 return\cf3  \cf1 typeof\cf3 (\cf4 CalendarEditingControl\cf3 );\par
+            \}\par
+        \}\par
+\par
+        \cf1 public\cf3  \cf1 override\cf3  \cf4 Type\cf3  ValueType\par
+        \{\par
+            \cf1 get\cf3\par
+            \{\par
+                \cf5 // Return the type of the value that CalendarCell contains.\cf3\par
+                \cf1 return\cf3  \cf1 typeof\cf3 (\cf4 DateTime\cf3 );\par
+            \}\par
+        \}\par
+\par
+        \cf1 public\cf3  \cf1 override\cf3  \cf1 object\cf3  DefaultNewRowValue\par
+        \{\par
+            \cf1 get\cf3\par
+            \{\par
+                \cf5 // Use the current date and time as the default value.\cf3\par
+                \cf1 return\cf3  \cf4 DateTime\cf3 .Now;\par
+            \}\par
+        \}\par
+    \}\par
+\par
+    \cf1 class\cf3  \cf4 CalendarEditingControl\cf3  : \cf4 DateTimePicker\cf3 , \cf4 IDataGridViewEditingControl\cf3\par
+    \{\par
+        \cf4 DataGridView\cf3  dataGridView;\par
+        \cf1 private\cf3  \cf1 bool\cf3  valueChanged = \cf1 false\cf3 ;\par
+        \cf1 int\cf3  rowIndex;\par
+\par
+        \cf1 public\cf3  CalendarEditingControl()\par
+        \{\par
+            \cf1 this\cf3 .Format = \cf4 DateTimePickerFormat\cf3 .Short;\par
+            \cf1 this\cf3 .MinDate = \cf1 new\cf3  \cf4 DateTime\cf3 (2014, 1, 1);\par
+        \}\par
+\par
+        \cf5 // Implements the IDataGridViewEditingControl.EditingControlFormattedValue \cf3\par
+        \cf5 // property.\cf3\par
+        \cf1 public\cf3  \cf1 object\cf3  EditingControlFormattedValue\par
+        \{\par
+            \cf1 get\cf3\par
+            \{\par
+                \cf1 return\cf3  \cf1 this\cf3 .Value.ToShortDateString();\par
+            \}\par
+            \cf1 set\cf3\par
+            \{\par
+                \cf1 if\cf3  (\cf1 value\cf3  \cf1 is\cf3  \cf4 String\cf3 )\par
+                \{\par
+                    \cf1 this\cf3 .Value = \cf4 DateTime\cf3 .Parse((\cf4 String\cf3 )\cf1 value\cf3 );\par
+                \}\par
+            \}\par
+        \}\par
+\par
+        \cf5 // Implements the \cf3\par
+        \cf5 // IDataGridViewEditingControl.GetEditingControlFormattedValue method.\cf3\par
+        \cf1 public\cf3  \cf1 object\cf3  GetEditingControlFormattedValue(\par
+            \cf4 DataGridViewDataErrorContexts\cf3  context)\par
+        \{\par
+            \cf1 return\cf3  EditingControlFormattedValue;\par
+        \}\par
+\par
+        \cf5 // Implements the \cf3\par
+        \cf5 // IDataGridViewEditingControl.ApplyCellStyleToEditingControl method.\cf3\par
+        \cf1 public\cf3  \cf1 void\cf3  ApplyCellStyleToEditingControl(\par
+            \cf4 DataGridViewCellStyle\cf3  dataGridViewCellStyle)\par
+        \{\par
+            \cf1 this\cf3 .Font = dataGridViewCellStyle.Font;\par
+            \cf1 this\cf3 .CalendarForeColor = dataGridViewCellStyle.ForeColor;\par
+            \cf1 this\cf3 .CalendarMonthBackground = dataGridViewCellStyle.BackColor;\par
+        \}\par
+\par
+        \cf5 // Implements the IDataGridViewEditingControl.EditingControlRowIndex \cf3\par
+        \cf5 // property.\cf3\par
+        \cf1 public\cf3  \cf1 int\cf3  EditingControlRowIndex\par
+        \{\par
+            \cf1 get\cf3\par
+            \{\par
+                \cf1 return\cf3  rowIndex;\par
+            \}\par
+            \cf1 set\cf3\par
+            \{\par
+                rowIndex = \cf1 value\cf3 ;\par
+            \}\par
+        \}\par
+\par
+        \cf5 // Implements the IDataGridViewEditingControl.EditingControlWantsInputKey \cf3\par
+        \cf5 // method.\cf3\par
+        \cf1 public\cf3  \cf1 bool\cf3  EditingControlWantsInputKey(\par
+            \cf4 Keys\cf3  key, \cf1 bool\cf3  dataGridViewWantsInputKey)\par
+        \{\par
+            \cf5 // Let the DateTimePicker handle the keys listed.\cf3\par
+            \cf1 switch\cf3  (key &amp; \cf4 Keys\cf3 .KeyCode)\par
+            \{\par
+                \cf1 case\cf3  \cf4 Keys\cf3 .Left:\par
+                \cf1 case\cf3  \cf4 Keys\cf3 .Up:\par
+                \cf1 case\cf3  \cf4 Keys\cf3 .Down:\par
+                \cf1 case\cf3  \cf4 Keys\cf3 .Right:\par
+                \cf1 case\cf3  \cf4 Keys\cf3 .Home:\par
+                \cf1 case\cf3  \cf4 Keys\cf3 .End:\par
+                \cf1 case\cf3  \cf4 Keys\cf3 .PageDown:\par
+                \cf1 case\cf3  \cf4 Keys\cf3 .PageUp:\par
+                    \cf1 return\cf3  \cf1 true\cf3 ;\par
+                \cf1 default\cf3 :\par
+                    \cf1 return\cf3  !dataGridViewWantsInputKey;\par
+            \}\par
+        \}\par
+\par
+        \cf5 // Implements the IDataGridViewEditingControl.PrepareEditingControlForEdit \cf3\par
+        \cf5 // method.\cf3\par
+        \cf1 public\cf3  \cf1 void\cf3  PrepareEditingControlForEdit(\cf1 bool\cf3  selectAll)\par
+        \{\par
+            \cf5 // No preparation needs to be done.\cf3\par
+        \}\par
+\par
+        \cf5 // Implements the IDataGridViewEditingControl\cf3\par
+        \cf5 // .RepositionEditingControlOnValueChange property.\cf3\par
+        \cf1 public\cf3  \cf1 bool\cf3  RepositionEditingControlOnValueChange\par
+        \{\par
+            \cf1 get\cf3\par
+            \{\par
+                \cf1 return\cf3  \cf1 false\cf3 ;\par
+            \}\par
+        \}\par
+\par
+        \cf5 // Implements the IDataGridViewEditingControl\cf3\par
+        \cf5 // .EditingControlDataGridView property.\cf3\par
+        \cf1 public\cf3  \cf4 DataGridView\cf3  EditingControlDataGridView\par
+        \{\par
+            \cf1 get\cf3\par
+            \{\par
+                \cf1 return\cf3  dataGridView;\par
+            \}\par
+            \cf1 set\cf3\par
+            \{\par
+                dataGridView = \cf1 value\cf3 ;\par
+            \}\par
+        \}\par
+\par
+        \cf5 // Implements the IDataGridViewEditingControl\cf3\par
+        \cf5 // .EditingControlValueChanged property.\cf3\par
+        \cf1 public\cf3  \cf1 bool\cf3  EditingControlValueChanged\par
+        \{\par
+            \cf1 get\cf3\par
+            \{\par
+                \cf1 return\cf3  valueChanged;\par
+            \}\par
+            \cf1 set\cf3\par
+            \{\par
+                valueChanged = \cf1 value\cf3 ;\par
+            \}\par
+        \}\par
+\par
+        \cf5 // Implements the IDataGridViewEditingControl\cf3\par
+        \cf5 // .EditingPanelCursor property.\cf3\par
+        \cf1 public\cf3  \cf4 Cursor\cf3  EditingPanelCursor\par
+        \{\par
+            \cf1 get\cf3\par
+            \{\par
+                \cf1 return\cf3  \cf1 base\cf3 .Cursor;\par
+            \}\par
+        \}\par
+\par
+        \cf1 protected\cf3  \cf1 override\cf3  \cf1 void\cf3  OnValueChanged(\cf4 EventArgs\cf3  eventargs)\par
+        \{\par
+            \cf5 // Notify the DataGridView that the contents of the cell\cf3\par
+            \cf5 // have changed.\cf3\par
+            valueChanged = \cf1 true\cf3 ;\par
+            \cf1 this\cf3 .EditingControlDataGridView.NotifyCurrentCellDirty(\cf1 true\cf3 );\par
+            \cf1 base\cf3 .OnValueChanged(eventargs);\par
+        \}\par
+    \}\par
+\}\par
+\pard\cf0\highlight0\f2\fs17\par
+}
+</lines></Ccode></codes></Cstorage>
